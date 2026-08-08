@@ -65,7 +65,7 @@
       font-weight:950;
       flex:none;
     }
-    .back-dot:before{content:"其";font-size:23px}
+    .back-dot:before{content:attr(data-logo-initial);font-size:23px}
     .brand-name{font-weight:950;font-size:23px;white-space:normal;overflow:visible;text-overflow:clip;letter-spacing:.02em;line-height:1.18}
     .status{display:none}
     .sub-head{margin:6px 0 0 61px;color:#d6eadf;font-size:15px;font-weight:800}
@@ -608,7 +608,7 @@
 <div class="app">
   <header class="top">
     <div class="brand-row">
-      <div class="brand"><span class="back-dot"></span><span class="brand-name" data-company-name>其軒投資有限公司</span></div>
+      <div class="brand"><span class="back-dot" data-logo-initial="其"></span><span class="brand-name" data-company-name>其軒投資有限公司</span></div>
       <div class="status">線上試算中</div>
     </div>
     <div class="sub-head">透明流程・安心評估・資金運用更靈活</div>
@@ -617,7 +617,7 @@
   <main id="estimateScreen" class="screen active">
     <section class="estimate">
       <div class="card hero-credit">
-        <div class="shield">其</div>
+        <div class="shield" data-logo-text>其</div>
         <div>
           <small>您的可貸額度</small>
           <strong id="heroAmount">NT$ 320,000</strong>
@@ -866,6 +866,9 @@
     document.getElementById('lineBtn').href = ENTERPRISE_LINE_URL;
     if(config.company_name){
       document.querySelectorAll('[data-company-name]').forEach(el => el.textContent = config.company_name);
+      const initial = Array.from(config.company_name.trim())[0] || '其';
+      document.querySelectorAll('[data-logo-initial]').forEach(el => el.setAttribute('data-logo-initial', initial));
+      document.querySelectorAll('[data-logo-text]').forEach(el => el.textContent = initial);
       document.title = document.title.replace('其軒投資有限公司', config.company_name);
     }
   }
